@@ -30,7 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/confirm").permitAll()
                 .anyRequest().authenticated()
                 .and().addFilterBefore(new CustomTokenAuthenticationFilter(mapTokenStorage(), userRepository), BasicAuthenticationFilter.class)
-                .csrf().disable();
+                .csrf().disable().logout().disable();
     }
 
     @Bean

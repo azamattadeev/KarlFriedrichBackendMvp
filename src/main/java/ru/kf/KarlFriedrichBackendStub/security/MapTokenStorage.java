@@ -20,4 +20,8 @@ public class MapTokenStorage implements TokenStorage{
         accessTokenToIdMap.put(accessToken, id);
     }
 
+    public Long deleteMapping(String accessToken) {
+        return accessTokenToIdMap.remove(accessToken);
+    }
+
 }

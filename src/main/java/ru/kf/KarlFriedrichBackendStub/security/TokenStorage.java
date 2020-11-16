@@ -6,4 +6,6 @@ public interface TokenStorage {
 
     void addMapping(String accessToken, Long id);
 
+    Long deleteMapping(String accessToken);
+
 }
