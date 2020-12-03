@@ -1,7 +1,7 @@
 package ru.kf.KarlFriedrichBackendStub.entities;
 
 import lombok.Data;
-import ru.kf.KarlFriedrichBackendStub.enums.OrderStatus;
+import ru.kf.KarlFriedrichBackendStub.entities.enums.OrderStatus;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

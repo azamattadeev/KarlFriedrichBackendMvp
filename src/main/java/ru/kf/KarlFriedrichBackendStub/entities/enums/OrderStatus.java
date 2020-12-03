@@ -1,4 +1,4 @@
-package ru.kf.KarlFriedrichBackendStub.enums;
+package ru.kf.KarlFriedrichBackendStub.entities.enums;
 
 public enum OrderStatus {
     NEW,
