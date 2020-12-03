@@ -13,12 +13,12 @@ public class MenuItem {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
-    private String description;
-
     @ManyToOne
     @JoinColumn(nullable = false)
     private MenuItemCategory category;
+
+    @Column(nullable = false)
+    private String description;
 
     @Column(nullable = false)
     private int priceInRoubles;

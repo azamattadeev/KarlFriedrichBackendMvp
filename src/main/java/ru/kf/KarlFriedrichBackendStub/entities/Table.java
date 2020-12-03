@@ -7,6 +7,7 @@ import javax.persistence.*;
 @Entity
 @Data
 public class Table {
+
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -15,4 +16,5 @@ public class Table {
 
     @Column(nullable = false, unique = true)
     private String qrCode;
+
 }

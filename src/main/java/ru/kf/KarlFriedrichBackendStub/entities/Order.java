@@ -10,6 +10,7 @@ import java.util.List;
 @Entity
 @Data
 public class Order {
+
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -25,4 +26,5 @@ public class Order {
 
     @Column(nullable = false)
     private LocalDateTime orderDateTime;
+
 }
