@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import ru.kf.KarlFriedrichBackendStub.dto.SignUpDto;
+import ru.kf.KarlFriedrichBackendStub.dto.incoming.SignUpDto;
 import ru.kf.KarlFriedrichBackendStub.services.SignUpAndLoginService;
 
 @RestController

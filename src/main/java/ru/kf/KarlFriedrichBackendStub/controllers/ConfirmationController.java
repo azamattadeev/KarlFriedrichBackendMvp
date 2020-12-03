@@ -5,15 +5,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import ru.kf.KarlFriedrichBackendStub.dto.ConfirmDto;
+import ru.kf.KarlFriedrichBackendStub.dto.incoming.ConfirmDto;
 import ru.kf.KarlFriedrichBackendStub.services.ConfirmLoginService;
 
 @RestController
-public class ConfirmController {
+public class ConfirmationController {
     private final ConfirmLoginService confirmLoginService;
 
     @Autowired
-    public ConfirmController(ConfirmLoginService confirmLoginService) {
+    public ConfirmationController(ConfirmLoginService confirmLoginService) {
         this.confirmLoginService = confirmLoginService;
     }
 
