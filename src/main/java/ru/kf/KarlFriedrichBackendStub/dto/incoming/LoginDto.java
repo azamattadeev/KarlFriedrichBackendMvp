@@ -1,4 +1,4 @@
-package ru.kf.KarlFriedrichBackendStub.dto;
+package ru.kf.KarlFriedrichBackendStub.dto.incoming;
 
 import lombok.Data;
 
