@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Data
@@ -14,6 +15,9 @@ public class Order {
     @ManyToOne
     @JoinColumn(nullable = false)
     private Table table;
+
+    @ManyToMany
+    private List<MenuItem> itemsList;
 
     @Column(nullable = false)
     private LocalDateTime orderDateTime;

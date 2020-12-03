@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
@@ -14,7 +15,10 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class ConfirmationData {
     @Id private String email;
+    @Column(nullable = false)
     private int code;
+    @Column(nullable = false)
     private LocalDateTime expirationTime;
+    @Column(nullable = false)
     private int attemptsLeft;
 }
