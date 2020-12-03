@@ -31,5 +31,4 @@ public class MenuItem {
 
     @Column(nullable = false)
     private String previewImageUrl;
-
 }

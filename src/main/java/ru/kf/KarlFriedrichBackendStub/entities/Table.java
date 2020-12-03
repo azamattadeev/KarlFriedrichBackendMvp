@@ -15,5 +15,4 @@ public class Table {
 
     @Column(nullable = false, unique = true)
     private String qrCode;
-
 }

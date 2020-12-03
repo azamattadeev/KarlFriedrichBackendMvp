@@ -1,6 +1,7 @@
 package ru.kf.KarlFriedrichBackendStub.entities;
 
 import lombok.Data;
+import ru.kf.KarlFriedrichBackendStub.enums.OrderStatus;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -12,6 +13,9 @@ public class Order {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
+    private OrderStatus status;
+
     @ManyToOne
     @JoinColumn(nullable = false)
     private Table table;
@@ -21,5 +25,4 @@ public class Order {
 
     @Column(nullable = false)
     private LocalDateTime orderDateTime;
-
 }
