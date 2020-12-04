@@ -1,4 +1,4 @@
-package ru.kf.KarlFriedrichBackendStub.controllers;
+package ru.kf.KarlFriedrichBackendStub.controllers.cheaters;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +18,7 @@ public class UserController {
         this.userRepository = userRepository;
     }
 
-    @GetMapping("/user")
+    @GetMapping("/cheaters/user")
     public ResponseEntity<List<User>> getUsers() {
         List<User> userList = userRepository.findAll();
         return ResponseEntity.ok(userList);

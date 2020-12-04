@@ -28,6 +28,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login").permitAll()
                 .antMatchers("/signup").permitAll()
                 .antMatchers("/confirm").permitAll()
+                .antMatchers("/menu").permitAll()
                 .anyRequest().authenticated()
                 .and().addFilterBefore(new CustomTokenAuthenticationFilter(mapTokenStorage(), userRepository), BasicAuthenticationFilter.class)
                 .csrf().disable().logout().disable();
