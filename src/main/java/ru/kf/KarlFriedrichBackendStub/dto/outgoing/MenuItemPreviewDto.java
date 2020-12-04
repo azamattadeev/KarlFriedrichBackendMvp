@@ -2,12 +2,14 @@ package ru.kf.KarlFriedrichBackendStub.dto.outgoing;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import ru.kf.KarlFriedrichBackendStub.entities.MenuItem;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 public class MenuItemPreviewDto {
     private Long id;
