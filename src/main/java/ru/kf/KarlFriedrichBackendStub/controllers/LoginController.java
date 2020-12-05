@@ -23,7 +23,7 @@ public class LoginController {
         try {
             signUpAndLoginService.login(loginDto.getEmail());
         } catch (IllegalArgumentException iae) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(iae.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(iae.getMessage());
         }
         return ResponseEntity.ok().build();
     }

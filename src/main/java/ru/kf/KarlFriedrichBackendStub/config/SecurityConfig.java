@@ -1,7 +1,6 @@
 package ru.kf.KarlFriedrichBackendStub.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -9,17 +8,18 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import ru.kf.KarlFriedrichBackendStub.repositories.UserRepository;
 import ru.kf.KarlFriedrichBackendStub.security.CustomTokenAuthenticationFilter;
-import ru.kf.KarlFriedrichBackendStub.security.MapTokenStorage;
-import ru.kf.KarlFriedrichBackendStub.security.TokenStorage;
+import ru.kf.KarlFriedrichBackendStub.services.TokenService;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserRepository userRepository;
+    private final TokenService tokenService;
 
     @Autowired
-    public SecurityConfig(UserRepository userRepository) {
+    public SecurityConfig(UserRepository userRepository, TokenService tokenService) {
         this.userRepository = userRepository;
+        this.tokenService = tokenService;
     }
 
     @Override
@@ -29,17 +29,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/signup").permitAll()
                 .antMatchers("/confirm").permitAll()
                 .antMatchers("/menu").permitAll()
+                .antMatchers("/refresh").permitAll()
                 .anyRequest().authenticated()
-                .and().addFilterBefore(new CustomTokenAuthenticationFilter(mapTokenStorage(), userRepository), BasicAuthenticationFilter.class)
+                .and().addFilterBefore(new CustomTokenAuthenticationFilter(tokenService, userRepository), BasicAuthenticationFilter.class)
                 .csrf().disable().logout().disable();
-    }
-
-    @Bean
-    public TokenStorage mapTokenStorage() {
-        TokenStorage storage =  new MapTokenStorage();
-        storage.addMapping("hardcodeToken", 4L);
-        storage.addMapping("hardcodeToken2", 3L);
-        return storage;
     }
 
 }

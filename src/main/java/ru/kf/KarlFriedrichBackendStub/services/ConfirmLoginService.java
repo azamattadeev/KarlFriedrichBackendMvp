@@ -6,31 +6,24 @@ import ru.kf.KarlFriedrichBackendStub.entities.ConfirmationData;
 import ru.kf.KarlFriedrichBackendStub.entities.User;
 import ru.kf.KarlFriedrichBackendStub.repositories.ConfirmationDataRepository;
 import ru.kf.KarlFriedrichBackendStub.repositories.UserRepository;
-import ru.kf.KarlFriedrichBackendStub.security.TokenStorage;
+import ru.kf.KarlFriedrichBackendStub.security.AccessRefreshTokenData;
 
-import java.security.SecureRandom;
 import java.time.LocalDateTime;
-import java.util.Base64;
 
 @Service
 public class ConfirmLoginService {
-    private final TokenStorage tokenStorage;
+    private final TokenService tokenService;
     private final UserRepository userRepository;
     private final ConfirmationDataRepository confirmationDataRepository;
 
-    private static final SecureRandom secureRandom = new SecureRandom();
-    private static final Base64.Encoder base64Encoder = Base64.getUrlEncoder();
-
-    private static final int TOKEN_LENGTH = 24;
-
     @Autowired
-    public ConfirmLoginService(TokenStorage tokenStorage, UserRepository userRepository, ConfirmationDataRepository confirmationDataRepository) {
-        this.tokenStorage = tokenStorage;
+    public ConfirmLoginService(TokenService tokenService, UserRepository userRepository, ConfirmationDataRepository confirmationDataRepository) {
+        this.tokenService = tokenService;
         this.userRepository = userRepository;
         this.confirmationDataRepository = confirmationDataRepository;
     }
 
-    public String confirm(String email, int confirmationCode){
+    public AccessRefreshTokenData confirm(String email, int confirmationCode){
         User user = userRepository.findUserByEmail(email);
         ConfirmationData confirmationData = confirmationDataRepository.findById(email).orElse(null);
 
@@ -46,9 +39,7 @@ public class ConfirmLoginService {
             userRepository.save(user);
             confirmationDataRepository.deleteById(confirmationData.getEmail());
 
-            String accessToken = generateNewToken();
-            tokenStorage.addMapping(accessToken, user.getId());
-            return accessToken;
+            return tokenService.startTokensForUser(user.getId());
         } else {
             processWrongCode(user, confirmationData);
             throw new IllegalArgumentException("Fail");
@@ -69,12 +60,6 @@ public class ConfirmLoginService {
 
     private static boolean isItExpired(ConfirmationData confirmationData) {
         return confirmationData.getExpirationTime().isBefore(LocalDateTime.now());
-    }
-
-    public static String generateNewToken() {
-        byte[] randomBytes = new byte[TOKEN_LENGTH];
-        secureRandom.nextBytes(randomBytes);
-        return base64Encoder.encodeToString(randomBytes);
     }
 
 }

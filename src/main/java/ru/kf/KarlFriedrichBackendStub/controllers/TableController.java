@@ -11,7 +11,7 @@ import ru.kf.KarlFriedrichBackendStub.services.TableService;
 
 @RestController
 public class TableController {
-    public final TableService tableService;
+    private final TableService tableService;
 
     @Autowired
     public TableController(TableService tableService) {
