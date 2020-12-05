@@ -20,7 +20,7 @@ public class TokenService {
     private static final int TOKEN_LENGTH = 24;
 
     private final static int ACCESS_EXPIRATION_TIME_IN_MINUTES = 30;
-    private final static int REFRESH_EXPIRATION_TIME_IN_DAYS = 180;
+    private final static int REFRESH_EXPIRATION_TIME_IN_DAYS = 60;
 
 
     public TokenService() {
@@ -31,12 +31,31 @@ public class TokenService {
     public Long getIdByAccessToken(String accessToken) {
         AccessRefreshTokenData data = accessDataMap.get(accessToken);
         if (data != null) {
+            if (LocalDateTime.now().isAfter(data.getAccessExpirationTime())) {
+                accessDataMap.remove(accessToken);
+                return null;
+            }
             return data.getUserId();
         }
         return null;
     }
 
     public AccessRefreshTokenData startTokensForUser(Long userId) {
+        String accessToken = generateNewToken();
+        String refreshToken = generateNewToken();
+        boolean tokensUnique;
+        do {
+            tokensUnique = true;
+            if (accessDataMap.containsKey(accessToken)) {
+                accessToken = generateNewToken();
+                tokensUnique = false;
+            }
+            if (refreshDataMap.containsKey(refreshToken)) {
+                refreshToken = generateNewToken();
+                tokensUnique = false;
+            }
+        } while (!tokensUnique);
+
         AccessRefreshTokenData accessRefreshTokenData = new AccessRefreshTokenData(
                 generateNewToken(),
                 generateNewToken(),
@@ -66,6 +85,10 @@ public class TokenService {
     public AccessRefreshTokenData refresh(String refreshToken) {
         AccessRefreshTokenData accessRefreshTokenData = refreshDataMap.get(refreshToken);
         if (accessRefreshTokenData != null) {
+            if (LocalDateTime.now().isAfter(accessRefreshTokenData.getRefreshExpirationTime())) {
+                refreshDataMap.remove(refreshToken);
+                return null;
+            }
             //TODO: Don't forget about concurrency and, possibly, atomicity
             deleteTokensForUser(accessRefreshTokenData.getAccessToken());
             return startTokensForUser(accessRefreshTokenData.getUserId());
