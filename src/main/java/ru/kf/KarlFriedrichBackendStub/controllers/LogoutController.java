@@ -18,7 +18,8 @@ public class LogoutController {
 
     @PostMapping("/logout")
     public ResponseEntity<Void> logout(@RequestHeader("Authorization") String accessToken) {
-        return (logoutService.logout(accessToken))
+        Long id = logoutService.logout(accessToken);
+        return (id != null)
                 ? ResponseEntity.ok().build()
                 : ResponseEntity.notFound().build();
     }

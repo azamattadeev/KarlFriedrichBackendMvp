@@ -41,6 +41,9 @@ public class TokenService {
     }
 
     public AccessRefreshTokenData startTokensForUser(Long userId) {
+        for (AccessRefreshTokenData accessRefreshTokenData : refreshDataMap.values()) {
+            if (userId.equals(accessRefreshTokenData.getUserId())) deleteTokensForUser(accessRefreshTokenData.getAccessToken());
+        }
         String accessToken = generateNewToken();
         String refreshToken = generateNewToken();
         boolean tokensUnique;
@@ -87,6 +90,7 @@ public class TokenService {
         if (accessRefreshTokenData != null) {
             if (LocalDateTime.now().isAfter(accessRefreshTokenData.getRefreshExpirationTime())) {
                 refreshDataMap.remove(refreshToken);
+                accessDataMap.remove(accessRefreshTokenData.getAccessToken());
                 return null;
             }
             //TODO: Don't forget about concurrency and, possibly, atomicity

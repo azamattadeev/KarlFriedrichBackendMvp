@@ -12,8 +12,8 @@ public class LogoutService {
         this.tokenService = tokenService;
     }
 
-    public boolean logout(String accessToken) {
-        return (tokenService.deleteTokensForUser(accessToken) != null);
+    public Long logout(String accessToken) {
+        return tokenService.deleteTokensForUser(accessToken);
     }
 
 }
