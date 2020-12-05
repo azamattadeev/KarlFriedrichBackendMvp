@@ -19,7 +19,7 @@ public class MenuItemController {
     }
 
     @GetMapping("/menu-item/{id}")
-    public ResponseEntity<MenuItemDto> getMenuItem(@PathVariable("id") Long id) {
+    public ResponseEntity<MenuItemDto> getMenuItem(@PathVariable Long id) {
         MenuItem menuItem = menuItemService.getMenuItemById(id);
         if (menuItem != null) {
             return ResponseEntity.ok(MenuItemDto.createFromMenuItem(menuItem));

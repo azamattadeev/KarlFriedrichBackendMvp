@@ -6,4 +6,7 @@ import ru.kf.KarlFriedrichBackendStub.entities.MenuItemCategory;
 
 @Repository
 public interface MenuItemCategoryRepository extends JpaRepository<MenuItemCategory, Long> {
+
+    MenuItemCategory findMenuItemCategoryByName(String name);
+
 }

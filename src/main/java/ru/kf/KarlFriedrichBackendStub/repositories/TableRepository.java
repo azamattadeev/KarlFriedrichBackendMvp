@@ -7,6 +7,8 @@ import ru.kf.KarlFriedrichBackendStub.entities.Table;
 @Repository
 public interface TableRepository extends JpaRepository<Table, Long> {
 
-    Table getTableByQrCode(String qrCode);
+    Table findTableByQrCode(String qrCode);
+
+    Table findTableByTableNumber(int tableNumber);
 
 }

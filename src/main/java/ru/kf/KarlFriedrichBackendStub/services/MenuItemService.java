@@ -15,7 +15,7 @@ public class MenuItemService {
     }
 
     public MenuItem getMenuItemById(Long id) {
-        return menuItemRepository.getOne(id);
+        return menuItemRepository.findById(id).orElse(null);
     }
 
 }

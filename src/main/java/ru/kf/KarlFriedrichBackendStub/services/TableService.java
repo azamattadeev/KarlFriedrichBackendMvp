@@ -15,11 +15,11 @@ public class TableService {
     }
 
     public Table getTableById(Long id) {
-        return tableRepository.getOne(id);
+        return tableRepository.findById(id).orElse(null);
     }
 
     public Table getTableByQR(String qrCode) {
-        return tableRepository.getTableByQrCode(qrCode);
+        return tableRepository.findTableByQrCode(qrCode);
     }
 
 }

@@ -19,7 +19,7 @@ public class TableController {
     }
 
     @GetMapping("/table/{id}")
-    public ResponseEntity<Table> getTableById(@PathVariable("id") Long id) {
+    public ResponseEntity<Table> getTableById(@PathVariable Long id) {
         Table table = tableService.getTableById(id);
         if (table != null) {
             return ResponseEntity.ok(table);
