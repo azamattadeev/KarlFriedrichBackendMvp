@@ -2,6 +2,7 @@ package ru.kf.KarlFriedrichBackendStub.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -9,7 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.kf.KarlFriedrichBackendStub.entities.Table;
 import ru.kf.KarlFriedrichBackendStub.services.TableService;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
+
 @RestController
+@Validated
 public class TableController {
     private final TableService tableService;
 
@@ -19,7 +24,7 @@ public class TableController {
     }
 
     @GetMapping("/table/{id}")
-    public ResponseEntity<Table> getTableById(@PathVariable Long id) {
+    public ResponseEntity<Table> getTableById(@PathVariable @Positive Long id) {
         Table table = tableService.getTableById(id);
         if (table != null) {
             return ResponseEntity.ok(table);
@@ -29,7 +34,7 @@ public class TableController {
     }
 
     @GetMapping("/table/")
-    public ResponseEntity<Table> getTableByQR(@RequestParam String qrCode) {
+    public ResponseEntity<Table> getTableByQR(@RequestParam @NotBlank String qrCode) {
         Table table = tableService.getTableByQR(qrCode);
         if (table != null) {
             return ResponseEntity.ok(table);

@@ -10,6 +10,8 @@ import ru.kf.KarlFriedrichBackendStub.dto.outgoing.AccessRefreshTokenDto;
 import ru.kf.KarlFriedrichBackendStub.security.AccessRefreshTokenData;
 import ru.kf.KarlFriedrichBackendStub.services.TokenService;
 
+import javax.validation.Valid;
+
 @RestController
 public class RefreshController {
     private TokenService tokenService;
@@ -20,7 +22,7 @@ public class RefreshController {
     }
 
     @PostMapping("/refresh")
-    public ResponseEntity<AccessRefreshTokenDto> refresh(@RequestBody RefreshDto refreshDto) {
+    public ResponseEntity<AccessRefreshTokenDto> refresh(@Valid @RequestBody RefreshDto refreshDto) {
         AccessRefreshTokenData accessRefreshTokenData = tokenService.refresh(refreshDto.getRefreshToken());
         if (accessRefreshTokenData != null) {
             return ResponseEntity.ok(AccessRefreshTokenDto.createFromAccessRefreshTokenData(accessRefreshTokenData));

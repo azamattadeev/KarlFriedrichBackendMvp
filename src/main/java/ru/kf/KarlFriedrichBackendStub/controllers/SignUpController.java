@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.kf.KarlFriedrichBackendStub.dto.incoming.SignUpDto;
 import ru.kf.KarlFriedrichBackendStub.services.SignUpAndLoginService;
 
+import javax.validation.Valid;
+
 @RestController
 public class SignUpController {
     private final SignUpAndLoginService signUpAndLoginService;
@@ -19,7 +21,7 @@ public class SignUpController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<String> signUp(@RequestBody SignUpDto signUpDto) {
+    public ResponseEntity<String> signUp(@Valid @RequestBody SignUpDto signUpDto) {
         try {
             signUpAndLoginService.signUp(signUpDto.getEmail(), signUpDto.getName(), signUpDto.getLanguage());
         } catch (IllegalArgumentException iae) {

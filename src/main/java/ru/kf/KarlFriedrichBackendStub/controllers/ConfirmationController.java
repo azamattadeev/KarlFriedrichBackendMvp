@@ -11,6 +11,8 @@ import ru.kf.KarlFriedrichBackendStub.dto.outgoing.AccessRefreshTokenDto;
 import ru.kf.KarlFriedrichBackendStub.security.AccessRefreshTokenData;
 import ru.kf.KarlFriedrichBackendStub.services.ConfirmLoginService;
 
+import javax.validation.Valid;
+
 @RestController
 public class ConfirmationController {
     private final ConfirmLoginService confirmLoginService;
@@ -21,7 +23,7 @@ public class ConfirmationController {
     }
 
     @PostMapping("/confirm")
-    public ResponseEntity<AccessRefreshTokenDto> confirm(@RequestBody ConfirmDto confirmDto) {
+    public ResponseEntity<AccessRefreshTokenDto> confirm(@Valid @RequestBody ConfirmDto confirmDto) {
         try {
             AccessRefreshTokenData accessRefreshTokenData = confirmLoginService.confirm(confirmDto.getEmail(), confirmDto.getConfirmationCode());
             return ResponseEntity.ok(AccessRefreshTokenDto.createFromAccessRefreshTokenData(accessRefreshTokenData));

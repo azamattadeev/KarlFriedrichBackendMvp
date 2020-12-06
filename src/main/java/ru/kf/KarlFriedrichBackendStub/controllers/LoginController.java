@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.kf.KarlFriedrichBackendStub.dto.incoming.LoginDto;
 import ru.kf.KarlFriedrichBackendStub.services.SignUpAndLoginService;
 
+import javax.validation.Valid;
+
 @RestController
 public class LoginController {
     private final SignUpAndLoginService signUpAndLoginService;
@@ -19,7 +21,7 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginDto loginDto) {
+    public ResponseEntity<String> login(@Valid @RequestBody LoginDto loginDto) {
         try {
             signUpAndLoginService.login(loginDto.getEmail());
         } catch (IllegalArgumentException iae) {
