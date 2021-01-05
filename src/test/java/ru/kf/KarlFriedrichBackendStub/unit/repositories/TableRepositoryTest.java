@@ -15,7 +15,7 @@ public class TableRepositoryTest {
     private TableRepository tableRepository;
 
     @Test
-    void savingTest() {
+    void saveTest() {
         int tableNumber = 45;
         String qrCode = "45";
 
