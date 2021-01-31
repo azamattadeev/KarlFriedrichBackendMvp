@@ -1,6 +1,8 @@
 package ru.kf.KarlFriedrichBackendStub.entities;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import ru.kf.KarlFriedrichBackendStub.entities.enums.OrderStatus;
 
 import javax.persistence.*;
@@ -8,7 +10,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
+@javax.persistence.Table(name = "A_ORDER")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Order {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,11 +22,15 @@ public class Order {
     @Column(nullable = false)
     private OrderStatus status;
 
-    @ManyToOne
-    @JoinColumn(nullable = false)
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "TABLE_ID")
     private Table table;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "ORDER_MENU_ITEMS",
+            joinColumns = {@JoinColumn(name = "order_id")},
+            inverseJoinColumns = {@JoinColumn(name = "node_id")})
     private List<MenuItem> itemsList;
 
     @Column(nullable = false)
