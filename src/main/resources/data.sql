@@ -1,4 +1,0 @@
--- INSERT INTO USER (id, email, name, role, language, is_confirmed)
--- VALUES
---     (1, 'user1@mail.com', 'Tom', 'ROLE_USER', 'ru', true),
---     (2, 'user2@mail.com', 'Matt', 'ROLE_USER', 'ru', true);

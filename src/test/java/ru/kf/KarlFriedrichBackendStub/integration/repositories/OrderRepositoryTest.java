@@ -130,6 +130,7 @@ public class OrderRepositoryTest {
 
         assertNotNull(order.getId());
         assertEquals(6, order.getItemsList().size());
+        assertEquals(6, orderRepository.getOne(order.getId()).getItemsList().size());
 
         int countMeat = 0;
         int countWine = 0;
