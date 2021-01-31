@@ -29,6 +29,10 @@ public class User {
     @Column(nullable = false)
     private String language;
 
+    @OneToOne
+    @JoinColumn(name = "order_id")
+    private Order order;
+
     @Column(nullable = false)
     private boolean isConfirmed;
 

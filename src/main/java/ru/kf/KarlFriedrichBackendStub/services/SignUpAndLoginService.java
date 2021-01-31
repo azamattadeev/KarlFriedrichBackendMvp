@@ -30,7 +30,7 @@ public class SignUpAndLoginService {
     public void signUp(String email, String name, String language) {
         if (userRepository.findUserByEmail(email) != null) throw new IllegalArgumentException("This email is busy");
 
-        User user = new User(null, email, name, "ROLE_USER", language, false);
+        User user = new User(null, email, name, "ROLE_USER", language, null, false);
         userRepository.save(user);
 
         ConfirmationData confirmationData = new ConfirmationData(
