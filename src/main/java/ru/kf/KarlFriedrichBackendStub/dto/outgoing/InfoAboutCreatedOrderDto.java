@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class InfoAboutCreatedOrderDto {
     private Long id;
-    //TODO: price
+    private int priceInRoubles;
 }

@@ -116,6 +116,7 @@ public class OrderRepositoryTest {
                 null,
                 OrderStatus.PAYMENT_ONLINE,
                 tableRepository.getOne(table1Id),
+                100,
                 new ArrayList<>(),
                 LocalDateTime.now()
         );

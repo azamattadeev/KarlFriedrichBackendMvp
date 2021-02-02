@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import ru.kf.KarlFriedrichBackendStub.entities.enums.OrderStatus;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -25,6 +26,9 @@ public class Order {
     @ManyToOne(optional = false)
     @JoinColumn(name = "TABLE_ID")
     private Table table;
+
+    @NotNull
+    private int priceInRoubles;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(

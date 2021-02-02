@@ -33,7 +33,7 @@ public class OrderController {
                     createOrderDto.getTableId(),
                     createOrderDto.getItemIds());
 
-            return ResponseEntity.ok(new InfoAboutCreatedOrderDto(order.getId()));
+            return ResponseEntity.ok(new InfoAboutCreatedOrderDto(order.getId(), order.getPriceInRoubles()));
         } catch (IllegalArgumentException ex) {
             return ResponseEntity.badRequest().build();
         }

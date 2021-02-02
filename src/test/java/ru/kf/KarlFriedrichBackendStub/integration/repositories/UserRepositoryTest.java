@@ -74,6 +74,7 @@ public class UserRepositoryTest {
                 null,
                 OrderStatus.PAYMENT_OFFLINE,
                 tableRepository.getOne(tableId),
+                400,
                 new ArrayList<>(),
                 LocalDateTime.now()
         );

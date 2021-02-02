@@ -46,13 +46,16 @@ public class OrderService {
             order.setTable(table);
         }
 
+        int priceInRoubles = 0;
         order.setItemsList(new ArrayList<>());
         for (Long itemId : itemIds) {
             MenuItem menuItem = menuItemRepository.findById(itemId).orElse(null);
             if (menuItem == null) throw new IllegalArgumentException("Invalid menu item id");
             if (!menuItem.isAccessibility()) throw new IllegalArgumentException("Menu item is not available");
             order.getItemsList().add(menuItem);
+            priceInRoubles += menuItem.getPriceInRoubles();
         }
+        order.setPriceInRoubles(priceInRoubles);
 
         User user = userRepository.findById(userId).orElse(null);
         if (user == null) throw new IllegalArgumentException("Invalid user id");
