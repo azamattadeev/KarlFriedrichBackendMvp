@@ -33,7 +33,7 @@ public class TableController {
         }
     }
 
-    @GetMapping("/table/")
+    @GetMapping("/table")
     public ResponseEntity<Table> getTableByQR(@RequestParam @NotBlank String qrCode) {
         Table table = tableService.getTableByQR(qrCode);
         if (table != null) {

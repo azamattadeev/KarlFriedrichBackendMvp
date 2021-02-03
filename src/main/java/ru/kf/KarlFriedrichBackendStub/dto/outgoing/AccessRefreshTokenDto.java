@@ -3,6 +3,7 @@ package ru.kf.KarlFriedrichBackendStub.dto.outgoing;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.kf.KarlFriedrichBackendStub.security.AccessRefreshTokenData;
 
 import java.time.LocalDateTime;
 
@@ -15,7 +16,7 @@ public class AccessRefreshTokenDto {
     private String refreshToken;
     private LocalDateTime refreshExpirationTime;
 
-    public static AccessRefreshTokenDto createFromAccessRefreshTokenData(ru.kf.KarlFriedrichBackendStub.security.AccessRefreshTokenData accessRefreshTokenData) {
+    public static AccessRefreshTokenDto createFromAccessRefreshTokenData(AccessRefreshTokenData accessRefreshTokenData) {
         return new AccessRefreshTokenDto(
                 accessRefreshTokenData.getAccessToken(),
                 accessRefreshTokenData.getAccessExpirationTime(),
