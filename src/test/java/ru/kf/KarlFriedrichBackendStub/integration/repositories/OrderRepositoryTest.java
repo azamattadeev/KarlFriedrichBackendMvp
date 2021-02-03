@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import ru.kf.KarlFriedrichBackendStub.entities.MenuItem;
 import ru.kf.KarlFriedrichBackendStub.entities.MenuItemCategory;
 import ru.kf.KarlFriedrichBackendStub.entities.Order;
@@ -22,6 +23,7 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+@ActiveProfiles("test")
 @SpringBootTest
 @Transactional
 public class OrderRepositoryTest {
