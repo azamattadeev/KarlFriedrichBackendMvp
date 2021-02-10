@@ -1,3 +1,10 @@
+INSERT INTO A_TABLE
+    (id, qr_code, table_number)
+VALUES
+    (1, 'table1', 1),
+    (2, 'table2', 2),
+    (3, 'table3', 3);
+
 INSERT INTO MENU_ITEM_CATEGORY
     (id, name)
 VALUES
