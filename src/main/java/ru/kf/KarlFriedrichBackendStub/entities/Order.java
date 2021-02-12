@@ -30,7 +30,7 @@ public class Order {
     @NotNull
     private int priceInRoubles;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "ORDER_MENU_ITEMS",
             joinColumns = {@JoinColumn(name = "order_id")},

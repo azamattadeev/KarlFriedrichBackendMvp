@@ -2,6 +2,7 @@ package ru.kf.KarlFriedrichBackendStub.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.kf.KarlFriedrichBackendStub.entities.MenuItem;
 import ru.kf.KarlFriedrichBackendStub.entities.Order;
 import ru.kf.KarlFriedrichBackendStub.entities.Table;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional
 public class OrderService {
 
     private final UserRepository userRepository;

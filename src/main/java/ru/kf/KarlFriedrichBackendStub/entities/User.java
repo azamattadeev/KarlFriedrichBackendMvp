@@ -29,7 +29,7 @@ public class User {
     @Column(nullable = false)
     private String language;
 
-    @OneToOne
+    @OneToOne(orphanRemoval = true)
     @JoinColumn(name = "order_id")
     private Order order;
 
