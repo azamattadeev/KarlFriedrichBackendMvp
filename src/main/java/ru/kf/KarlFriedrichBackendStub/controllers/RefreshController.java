@@ -14,7 +14,7 @@ import javax.validation.Valid;
 
 @RestController
 public class RefreshController {
-    private TokenService tokenService;
+    private final TokenService tokenService;
 
     @Autowired
     public RefreshController(TokenService tokenService) {
