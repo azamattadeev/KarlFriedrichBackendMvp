@@ -5,9 +5,7 @@ import ru.kf.KarlFriedrichBackendStub.security.AccessRefreshTokenData;
 
 import java.security.SecureRandom;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Base64;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -106,11 +104,6 @@ public class TokenService {
         byte[] randomBytes = new byte[TOKEN_LENGTH];
         secureRandom.nextBytes(randomBytes);
         return base64Encoder.encodeToString(randomBytes);
-    }
-
-    //TODO: remove this method, it's needed only for TokenCheaterController
-    public List<AccessRefreshTokenData> getAllTokensData() {
-        return new ArrayList<>(accessDataMap.values());
     }
 
 }
