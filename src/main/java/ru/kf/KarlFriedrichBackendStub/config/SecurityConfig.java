@@ -33,7 +33,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/refresh").permitAll()
                 .anyRequest().authenticated()
                 .and().addFilterBefore(new CustomTokenAuthenticationFilter(tokenService, userRepository), BasicAuthenticationFilter.class)
-                .csrf().disable().logout().disable();
+                .csrf().disable()
+                .logout().disable();
     }
 
 }
