@@ -23,4 +23,7 @@ public class Table {
     @Column(nullable = false, unique = true)
     private String qrCode;
 
+    @Column(nullable = false, unique = true)
+    private int rKeeperId;
+
 }

@@ -5,8 +5,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.kf.KarlFriedrichBackendMvp.menu_item.MenuItem;
 import ru.kf.KarlFriedrichBackendMvp.menu_item.MenuItemRepository;
-import ru.kf.KarlFriedrichBackendMvp.order.enums.OrderStatus;
-import ru.kf.KarlFriedrichBackendMvp.order.enums.PaymentType;
 import ru.kf.KarlFriedrichBackendMvp.security.user.User;
 import ru.kf.KarlFriedrichBackendMvp.security.user.UserRepository;
 import ru.kf.KarlFriedrichBackendMvp.table.Table;
@@ -33,11 +31,8 @@ public class OrderService {
         this.menuItemRepository = menuItemRepository;
     }
 
-    public Order createOrderForUser(Long userId, PaymentType paymentType, Long tableId, List<Long> itemIds) {
+    public Order createOrderForUser(Long userId, Long tableId, List<Long> itemIds) {
         Order order = new Order();
-        order.setStatus((paymentType == PaymentType.OFFLINE)
-                ? OrderStatus.PAYMENT_OFFLINE
-                : OrderStatus.PAYMENT_ONLINE);
 
         Table table = tableRepository.findById(tableId).orElse(null);
         if (table == null) {

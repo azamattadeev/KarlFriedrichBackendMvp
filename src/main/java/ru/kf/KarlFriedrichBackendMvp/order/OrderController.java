@@ -27,7 +27,6 @@ public class OrderController {
         try {
             Order order = orderService.createOrderForUser(
                     currentUser.getId(),
-                    createOrderDto.getPaymentType(),
                     createOrderDto.getTableId(),
                     createOrderDto.getItemIds());
 

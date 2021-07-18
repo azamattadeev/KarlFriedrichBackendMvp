@@ -22,10 +22,10 @@ public class TableController {
     }
 
     @GetMapping("/table/{id}")
-    public ResponseEntity<Table> getTableById(@PathVariable @Positive Long id) {
+    public ResponseEntity<TableDto> getTableById(@PathVariable @Positive Long id) {
         Table table = tableService.getTableById(id);
         return (table != null)
-                ? ResponseEntity.ok(table)
+                ? ResponseEntity.ok(TableDto.createFromTable(table))
                 : ResponseEntity.notFound().build();
     }
 

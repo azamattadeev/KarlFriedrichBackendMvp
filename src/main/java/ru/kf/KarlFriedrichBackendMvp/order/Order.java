@@ -3,7 +3,6 @@ package ru.kf.KarlFriedrichBackendMvp.order;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.kf.KarlFriedrichBackendMvp.order.enums.OrderStatus;
 import ru.kf.KarlFriedrichBackendMvp.menu_item.MenuItem;
 
 import javax.persistence.*;
@@ -20,9 +19,6 @@ public class Order {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(nullable = false)
-    private OrderStatus status;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "TABLE_ID")

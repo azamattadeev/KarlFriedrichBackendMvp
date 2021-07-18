@@ -6,13 +6,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
-import ru.kf.KarlFriedrichBackendMvp.order.Order;
-import ru.kf.KarlFriedrichBackendMvp.order.enums.OrderStatus;
-import ru.kf.KarlFriedrichBackendMvp.order.enums.PaymentType;
 import ru.kf.KarlFriedrichBackendMvp.menu_item.MenuItem;
 import ru.kf.KarlFriedrichBackendMvp.menu_item.MenuItemRepository;
 import ru.kf.KarlFriedrichBackendMvp.menu_item_category.MenuItemCategory;
 import ru.kf.KarlFriedrichBackendMvp.menu_item_category.MenuItemCategoryRepository;
+import ru.kf.KarlFriedrichBackendMvp.order.Order;
 import ru.kf.KarlFriedrichBackendMvp.order.OrderService;
 import ru.kf.KarlFriedrichBackendMvp.security.user.User;
 import ru.kf.KarlFriedrichBackendMvp.security.user.UserRepository;
@@ -110,10 +108,9 @@ public class OrderServiceTest {
                 item2.getId()
         ));
 
-        Order order = orderService.createOrderForUser(user.getId(), PaymentType.OFFLINE, table.getId(), itemIds);
+        Order order = orderService.createOrderForUser(user.getId(), table.getId(), itemIds);
 
         assertNotNull(order);
-        assertEquals(OrderStatus.PAYMENT_OFFLINE, order.getStatus());
         assertEquals(order, user.getOrder());
         assertEquals(5, user.getOrder().getItemsList().size());
 

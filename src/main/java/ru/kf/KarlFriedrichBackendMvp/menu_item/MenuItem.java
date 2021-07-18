@@ -37,4 +37,8 @@ public class MenuItem {
 
     @Column(nullable = false)
     private String previewImageUrl;
+
+    @Column(nullable = false, unique = true)
+    private int rKeeperId;
+
 }
