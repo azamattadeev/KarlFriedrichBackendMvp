@@ -2,6 +2,7 @@ package ru.kf.KarlFriedrichBackendMvp.security.login;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.kf.KarlFriedrichBackendMvp.security.confirmation.ConfirmationData;
 import ru.kf.KarlFriedrichBackendMvp.security.confirmation.ConfirmationDataRepository;
 import ru.kf.KarlFriedrichBackendMvp.security.user.UserRepository;
@@ -13,6 +14,7 @@ import static ru.kf.KarlFriedrichBackendMvp.security.Constants.CONFIRMATION_CODE
 import static ru.kf.KarlFriedrichBackendMvp.security.Constants.MAX_CONFIRMATION_CODE_ATTEMPTS;
 
 @Service
+@Transactional
 public class LoginService {
     private final UserRepository userRepository;
     private final ConfirmationDataRepository confirmationDataRepository;

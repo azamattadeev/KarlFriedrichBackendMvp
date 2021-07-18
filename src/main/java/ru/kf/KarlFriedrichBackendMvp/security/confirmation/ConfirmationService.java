@@ -2,6 +2,7 @@ package ru.kf.KarlFriedrichBackendMvp.security.confirmation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.kf.KarlFriedrichBackendMvp.security.tokens.AccessRefreshTokenData;
 import ru.kf.KarlFriedrichBackendMvp.security.tokens.TokenService;
 import ru.kf.KarlFriedrichBackendMvp.security.user.User;
@@ -10,6 +11,7 @@ import ru.kf.KarlFriedrichBackendMvp.security.user.UserRepository;
 import java.time.LocalDateTime;
 
 @Service
+@Transactional
 public class ConfirmationService {
     private final TokenService tokenService;
     private final UserRepository userRepository;
@@ -46,13 +48,11 @@ public class ConfirmationService {
     }
 
     private void processExpired(User user, ConfirmationData confirmationData) {
-        // TODO: DB interactions below must be atomic transaction
         confirmationDataRepository.deleteById(confirmationData.getEmail());
         if (!user.isConfirmed()) userRepository.deleteById(user.getId());
     }
 
     private void processWrongCode(User user, ConfirmationData confirmationData) {
-        // TODO: DB interactions below must be atomic transaction
         confirmationData.setAttemptsLeft(confirmationData.getAttemptsLeft() - 1);
         if (confirmationData.getAttemptsLeft() <= 0) processExpired(user, confirmationData);
     }
