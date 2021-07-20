@@ -16,7 +16,7 @@ VALUES
     (6, 'Горячие напитки');
 
 INSERT INTO MENU_ITEM
-    (id, accessibility, description, image_url, name, preview_image_url, price, category_id, r_keeper_id)
+    (id, available, description, image_url, name, preview_image_url, price, category_id, r_keeper_id)
 VALUES
     (1, TRUE,
     '«Цезарь» — овощной салат. Популярное блюдо американской кухни',

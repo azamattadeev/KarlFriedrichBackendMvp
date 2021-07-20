@@ -66,7 +66,6 @@ public class TokenService {
                 userId
         );
 
-        //TODO: Make atomic using locks or use special cache library (the second solution is better)
         accessDataMap.put(accessRefreshTokenData.getAccessToken(), accessRefreshTokenData);
         refreshDataMap.put(accessRefreshTokenData.getRefreshToken(), accessRefreshTokenData);
 
@@ -76,7 +75,6 @@ public class TokenService {
     public Long deleteTokensForUser(String accessToken) {
         AccessRefreshTokenData accessRefreshTokenData = accessDataMap.get(accessToken);
         if (accessRefreshTokenData != null) {
-            //TODO: Make atomic using locks or use special cache library (the second solution is better)
             accessDataMap.remove(accessRefreshTokenData.getAccessToken());
             refreshDataMap.remove(accessRefreshTokenData.getRefreshToken());
             return accessRefreshTokenData.getUserId();
@@ -92,7 +90,6 @@ public class TokenService {
                 accessDataMap.remove(accessRefreshTokenData.getAccessToken());
                 return null;
             }
-            //TODO: Don't forget about concurrency and, possibly, atomicity
             deleteTokensForUser(accessRefreshTokenData.getAccessToken());
             return startTokensForUser(accessRefreshTokenData.getUserId());
         }
