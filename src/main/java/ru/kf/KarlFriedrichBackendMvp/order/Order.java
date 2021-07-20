@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.kf.KarlFriedrichBackendMvp.menu_item.MenuItem;
+import ru.kf.KarlFriedrichBackendMvp.table.Table;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -22,10 +23,10 @@ public class Order {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "TABLE_ID")
-    private ru.kf.KarlFriedrichBackendMvp.table.Table table;
+    private Table table;
 
     @NotNull
-    private int priceInRoubles;
+    private int price;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(

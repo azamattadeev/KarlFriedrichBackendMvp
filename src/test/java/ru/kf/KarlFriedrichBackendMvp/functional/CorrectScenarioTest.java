@@ -20,7 +20,6 @@ import ru.kf.KarlFriedrichBackendMvp.security.tokens.AccessRefreshTokenDto;
 import ru.kf.KarlFriedrichBackendMvp.security.current_user.CurrentUserDto;
 import ru.kf.KarlFriedrichBackendMvp.order.dto.InfoAboutCreatedOrderDto;
 import ru.kf.KarlFriedrichBackendMvp.menu.MenuDto;
-import ru.kf.KarlFriedrichBackendMvp.order.enums.PaymentType;
 import ru.kf.KarlFriedrichBackendMvp.menu_item.MenuItem;
 import ru.kf.KarlFriedrichBackendMvp.menu_item.MenuItemRepository;
 import ru.kf.KarlFriedrichBackendMvp.menu_item_category.MenuItemCategory;
@@ -177,7 +176,7 @@ public class CorrectScenarioTest {
         InfoAboutCreatedOrderDto infoAboutCreatedOrderDto = JsonConverter.mapFromJson(
                 mvcResult.getResponse().getContentAsString(), InfoAboutCreatedOrderDto.class);
 
-        assertEquals(price, infoAboutCreatedOrderDto.getPriceInRoubles());
+        assertEquals(price, infoAboutCreatedOrderDto.getPrice());
 
         Order order = orderRepository.findById(infoAboutCreatedOrderDto.getId()).orElse(null);
         assertNotNull(order);

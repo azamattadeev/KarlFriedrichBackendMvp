@@ -26,8 +26,9 @@ public class MenuItem {
 
     private String description;
 
+    //Price in kopecks
     @Column(nullable = false)
-    private int priceInRoubles;
+    private int price;
 
     @Column(nullable = false)
     private boolean accessibility;

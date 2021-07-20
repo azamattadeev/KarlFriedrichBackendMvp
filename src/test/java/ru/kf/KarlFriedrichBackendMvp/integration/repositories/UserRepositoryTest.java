@@ -8,7 +8,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import ru.kf.KarlFriedrichBackendMvp.order.Order;
 import ru.kf.KarlFriedrichBackendMvp.order.OrderRepository;
-import ru.kf.KarlFriedrichBackendMvp.order.enums.OrderStatus;
 import ru.kf.KarlFriedrichBackendMvp.menu_item.MenuItem;
 import ru.kf.KarlFriedrichBackendMvp.menu_item.MenuItemRepository;
 import ru.kf.KarlFriedrichBackendMvp.menu_item_category.MenuItemCategory;

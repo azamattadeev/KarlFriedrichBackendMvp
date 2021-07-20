@@ -12,7 +12,7 @@ public class MenuItemDto {
     private String name;
     private String category;
     private String description;
-    private int priceInRoubles;
+    private int price;
     private String imageUrl;
 
     public static MenuItemDto createFromMenuItem(MenuItem menuItem) {
@@ -21,7 +21,7 @@ public class MenuItemDto {
                 menuItem.getName(),
                 menuItem.getCategory().getName(),
                 menuItem.getDescription(),
-                menuItem.getPriceInRoubles(),
+                menuItem.getPrice(),
                 menuItem.getImageUrl()
         );
     }
