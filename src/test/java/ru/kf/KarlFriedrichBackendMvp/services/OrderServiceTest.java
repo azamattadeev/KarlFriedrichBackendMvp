@@ -1,6 +1,5 @@
-package ru.kf.KarlFriedrichBackendMvp.integration.services;
+package ru.kf.KarlFriedrichBackendMvp.services;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +59,7 @@ public class OrderServiceTest {
 
         user = userRepository.save(user);
 
-        table = new Table(null, 31922598, "OrderServiceTest_d34ud4cfc");
+        table = new Table(null, 31922598, "OrderServiceTest_d34ud4cfc", 10003004);
         table = tableRepository.save(table);
 
         category = categoryRepository.save(new MenuItemCategory(null, "OrderServiceTest_category_4d35g"));
@@ -73,7 +72,8 @@ public class OrderServiceTest {
                 223,
                 true,
                 "url",
-                "url"
+                "url",
+                2222333
         );
         item2 = new MenuItem(
                 null,
@@ -83,19 +83,11 @@ public class OrderServiceTest {
                 233,
                 true,
                 "url",
-                "url"
+                "url",
+                21331442
         );
         item1 = menuItemRepository.save(item1);
         item2 = menuItemRepository.save(item2);
-    }
-
-    @AfterEach
-    public void tearDown() {
-        userRepository.delete(user);
-        tableRepository.delete(table);
-        menuItemRepository.delete(item1);
-        menuItemRepository.delete(item2);
-        categoryRepository.delete(category);
     }
 
     @Test

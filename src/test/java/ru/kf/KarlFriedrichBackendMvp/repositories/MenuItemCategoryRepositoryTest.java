@@ -1,4 +1,4 @@
-package ru.kf.KarlFriedrichBackendMvp.unit.repositories;
+package ru.kf.KarlFriedrichBackendMvp.repositories;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

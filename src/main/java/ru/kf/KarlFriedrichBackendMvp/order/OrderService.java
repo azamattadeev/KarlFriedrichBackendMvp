@@ -61,7 +61,7 @@ public class OrderService {
     private void setItemsAndPriceToOrder(Order order, List<Long> itemIds) {
         Set<MenuItem> itemSet = menuItemRepository.findAllByIdIn(itemIds);
 
-        if (itemSet.stream().anyMatch(it -> !it.isAccessibility())) {
+        if (itemSet.stream().anyMatch(it -> !it.isAvailable())) {
             throw new IllegalArgumentException("Menu item is not available");
         }
 

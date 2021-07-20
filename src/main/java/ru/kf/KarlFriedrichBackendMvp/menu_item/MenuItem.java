@@ -31,7 +31,7 @@ public class MenuItem {
     private int price;
 
     @Column(nullable = false)
-    private boolean accessibility;
+    private boolean available;
 
     @Column(nullable = false)
     private String imageUrl;

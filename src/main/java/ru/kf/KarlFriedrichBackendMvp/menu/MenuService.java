@@ -19,7 +19,7 @@ public class MenuService {
     }
 
     public List<MenuItem> getMenu() {
-        return menuItemRepository.findAllByAccessibilityIsTrue();
+        return menuItemRepository.findAllByAvailableIsTrue();
     }
 
 }

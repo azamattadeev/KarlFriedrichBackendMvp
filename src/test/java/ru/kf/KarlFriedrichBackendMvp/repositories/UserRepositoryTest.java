@@ -1,4 +1,4 @@
-package ru.kf.KarlFriedrichBackendMvp.integration.repositories;
+package ru.kf.KarlFriedrichBackendMvp.repositories;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -56,7 +56,7 @@ public class UserRepositoryTest {
     void setUp() {
         String qrCode1 = "userTest_d234f3f43w2fa3w3d3d";
         int tableNumber = 712032899;
-        tableId = tableRepository.save(new Table(null, tableNumber, qrCode1)).getId();
+        tableId = tableRepository.save(new Table(null, tableNumber, qrCode1, 10003430)).getId();
         category = categoryRepository.save(new MenuItemCategory(null, "user_TestCategory_3dfd"));
         soup = menuItemRepository.save(new MenuItem(
                 null,
@@ -66,7 +66,8 @@ public class UserRepositoryTest {
                 235,
                 true,
                 "image url",
-                "preview url"
+                "preview url",
+                1321244
         ));
         wine = menuItemRepository.save(new MenuItem(
                 null,
@@ -76,12 +77,12 @@ public class UserRepositoryTest {
                 225,
                 true,
                 "image url",
-                "preview url"
+                "preview url",
+                4214112
         ));
 
         order = new Order(
                 null,
-                OrderStatus.PAYMENT_OFFLINE,
                 tableRepository.getOne(tableId),
                 400,
                 new ArrayList<>(),
@@ -91,15 +92,6 @@ public class UserRepositoryTest {
         order.getItemsList().add(wine);
 
         order = orderRepository.save(order);
-    }
-
-    @AfterEach
-    void tearDown() {
-        tableRepository.deleteById(tableId);
-        categoryRepository.delete(category);
-        menuItemRepository.delete(soup);
-        menuItemRepository.delete(wine);
-        orderRepository.delete(order);
     }
 
     @Test

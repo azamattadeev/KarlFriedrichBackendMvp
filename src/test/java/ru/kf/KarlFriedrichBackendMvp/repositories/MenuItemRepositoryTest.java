@@ -1,6 +1,5 @@
-package ru.kf.KarlFriedrichBackendMvp.integration.repositories;
+package ru.kf.KarlFriedrichBackendMvp.repositories;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,24 +45,16 @@ public class MenuItemRepositoryTest {
         category4Id = categoryRepository.save(new MenuItemCategory(null, category4)).getId();
     }
 
-    @AfterEach
-    void tearDown() {
-        categoryRepository.deleteById(category1Id);
-        categoryRepository.deleteById(category2Id);
-        categoryRepository.deleteById(category3Id);
-        categoryRepository.deleteById(category4Id);
-    }
-
     @Test
     void saveDeleteTest() {
         String name = "Meat";
         MenuItem item = MenuItem.builder()
                 .name(name)
-                .accessibility(true)
+                .available(true)
                 .category(categoryRepository.getOne(category1Id))
                 .imageUrl("url")
                 .previewImageUrl("url")
-                .priceInRoubles(400)
+                .price(40000)
                 .build();
 
         item = menuItemRepository.save(item);
@@ -74,58 +65,6 @@ public class MenuItemRepositoryTest {
 
         menuItemRepository.deleteById(item.getId());
         assertNull(menuItemRepository.findById(item.getId()).orElse(null));
-    }
-
-    @Test
-    void findAllByAccessibilityIsTrue() {
-        MenuItem item1 = MenuItem.builder()
-                .name("Food 1")
-                .accessibility(true)
-                .category(categoryRepository.getOne(category1Id))
-                .imageUrl("url")
-                .previewImageUrl("url")
-                .priceInRoubles(400)
-                .build();
-
-        MenuItem item2 = MenuItem.builder()
-                .name("Food 2")
-                .accessibility(true)
-                .category(categoryRepository.getOne(category2Id))
-                .imageUrl("url")
-                .previewImageUrl("url")
-                .priceInRoubles(300)
-                .build();
-
-        MenuItem item3 = MenuItem.builder()
-                .name("Food 3")
-                .accessibility(false)
-                .category(categoryRepository.getOne(category1Id))
-                .imageUrl("url")
-                .previewImageUrl("url")
-                .priceInRoubles(300)
-                .build();
-
-        item1 = menuItemRepository.save(item1);
-        item2 = menuItemRepository.save(item2);
-        item3 = menuItemRepository.save(item3);
-
-        List<MenuItem> availableFood = menuItemRepository.findAllByAccessibilityIsTrue();
-
-        assertEquals(2, availableFood.size());
-
-        boolean contains1 = false;
-        boolean contains2 = false;
-        boolean contains3 = false;
-
-        for (MenuItem menuItem : availableFood) {
-            if (menuItem.getId().equals(item1.getId())) contains1 = true;
-            if (menuItem.getId().equals(item2.getId())) contains2 = true;
-            if (menuItem.getId().equals(item3.getId())) contains3 = true;
-        }
-
-        assertTrue(contains1);
-        assertTrue(contains2);
-        assertFalse(contains3);
     }
 
 }

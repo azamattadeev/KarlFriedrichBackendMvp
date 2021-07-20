@@ -40,7 +40,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 @AutoConfigureMockMvc
 @Transactional
-public class CorrectScenarioTest {
+public class FullCorrectScenarioTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -77,7 +77,8 @@ public class CorrectScenarioTest {
                 300,
                 true,
                 "url",
-                "url"
+                "url",
+                1000432
         ));
         item2 = menuItemRepository.save(new MenuItem(
                 null,
@@ -87,9 +88,10 @@ public class CorrectScenarioTest {
                 530,
                 true,
                 "url",
-                "url"
+                "url",
+                10004235
         ));
-        table = tableRepository.save(new Table(null, TABLE_NUMBER, QR_CODE));
+        table = tableRepository.save(new Table(null, TABLE_NUMBER, QR_CODE, 130021));
     }
 
     @AfterEach
@@ -152,7 +154,7 @@ public class CorrectScenarioTest {
 
         assertEquals(TABLE_NUMBER, table.getTableNumber());
 
-        int price = 3 * menuItemPreviews[0].getPriceInRoubles() + menuItemPreviews[1].getPriceInRoubles();
+        int price = 3 * menuItemPreviews[0].getPrice() + menuItemPreviews[1].getPrice();
         List<Long> itemIds = new ArrayList<>(Arrays.asList(
                 menuItemPreviews[0].getId(),
                 menuItemPreviews[0].getId(),
@@ -166,7 +168,6 @@ public class CorrectScenarioTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonConverter.mapToJson(new CreateOrderDto(
                         table.getId(),
-                        PaymentType.OFFLINE,
                         itemIds
                 )))
         ).andReturn();
@@ -181,7 +182,7 @@ public class CorrectScenarioTest {
         Order order = orderRepository.findById(infoAboutCreatedOrderDto.getId()).orElse(null);
         assertNotNull(order);
 
-        assertEquals(price, order.getPriceInRoubles());
+        assertEquals(price, order.getPrice());
 
         mvcResult = mockMvc.perform(MockMvcRequestBuilders
                 .get("/current-user")

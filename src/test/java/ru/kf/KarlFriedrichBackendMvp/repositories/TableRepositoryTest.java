@@ -1,4 +1,4 @@
-package ru.kf.KarlFriedrichBackendMvp.unit.repositories;
+package ru.kf.KarlFriedrichBackendMvp.repositories;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class TableRepositoryTest {
         int tableNumber = 45;
         String qrCode = "45";
 
-        Table table = new Table(null, tableNumber, qrCode);
+        Table table = new Table(null, tableNumber, qrCode, 1000321);
         table = tableRepository.save(table);
 
         assertNotNull(table.getId());
@@ -39,10 +39,10 @@ public class TableRepositoryTest {
 
     @Test
     void findByNumberAndQRTest() {
-        Table table1 = new Table(null, 11, "11");
-        Table table2 = new Table(null, 22, "22");
-        Table table3 = new Table(null, 33, "33");
-        Table table4 = new Table(null, 44, "44");
+        Table table1 = new Table(null, 11, "11", 1100011);
+        Table table2 = new Table(null, 22, "22", 1100022);
+        Table table3 = new Table(null, 33, "33", 1100033);
+        Table table4 = new Table(null, 44, "44", 1100044);
 
         table1 = tableRepository.save(table1);
         table2 = tableRepository.save(table2);
@@ -59,7 +59,7 @@ public class TableRepositoryTest {
 
         tableRepository.delete(table1);
         tableRepository.delete(table2);
-        tableRepository.delete(new Table(table3.getId(), -1, null));
+        tableRepository.delete(new Table(table3.getId(), -1, null, 10003004));
         tableRepository.deleteById(table4.getId());
 
         assertNull(tableRepository.findById(table1.getId()).orElse(null));

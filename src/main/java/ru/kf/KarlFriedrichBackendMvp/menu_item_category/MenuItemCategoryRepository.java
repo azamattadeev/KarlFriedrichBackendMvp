@@ -5,4 +5,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MenuItemCategoryRepository extends JpaRepository<MenuItemCategory, Long> {
+
+    MenuItemCategory findByName(String name);
+
 }

@@ -9,7 +9,7 @@ import java.util.Set;
 @Repository
 public interface MenuItemRepository extends JpaRepository<MenuItem, Long> {
 
-    List<MenuItem> findAllByAccessibilityIsTrue();
+    List<MenuItem> findAllByAvailableIsTrue();
 
     Set<MenuItem> findAllByIdIn(List<Long> idList);
 
