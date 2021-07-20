@@ -13,6 +13,9 @@ import ru.kf.KarlFriedrichBackendMvp.table.TableRepository;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -34,23 +37,8 @@ public class OrderService {
     public Order createOrderForUser(Long userId, Long tableId, List<Long> itemIds) {
         Order order = new Order();
 
-        Table table = tableRepository.findById(tableId).orElse(null);
-        if (table == null) {
-            throw new IllegalArgumentException("Invalid table id");
-        } else {
-            order.setTable(table);
-        }
-
-        int priceInRoubles = 0;
-        order.setItemsList(new ArrayList<>());
-        for (Long itemId : itemIds) {
-            MenuItem menuItem = menuItemRepository.findById(itemId).orElse(null);
-            if (menuItem == null) throw new IllegalArgumentException("Invalid menu item id");
-            if (!menuItem.isAccessibility()) throw new IllegalArgumentException("Menu item is not available");
-            order.getItemsList().add(menuItem);
-            priceInRoubles += menuItem.getPriceInRoubles();
-        }
-        order.setPriceInRoubles(priceInRoubles);
+        setTableToOrder(order, tableId);
+        setItemsAndPriceToOrder(order, itemIds);
 
         User user = userRepository.findById(userId).orElse(null);
         if (user == null) throw new IllegalArgumentException("Invalid user id");
@@ -59,8 +47,42 @@ public class OrderService {
 
         order = orderRepository.save(order);
         user.setOrder(order);
-        userRepository.save(user);
         return order;
+    }
+
+    private void setTableToOrder(Order order, Long tableId) {
+        Table table = tableRepository.findById(tableId).orElse(null);
+        if (table == null) {
+            throw new IllegalArgumentException("Invalid table id");
+        }
+        order.setTable(table);
+    }
+
+    private void setItemsAndPriceToOrder(Order order, List<Long> itemIds) {
+        Set<MenuItem> itemSet = menuItemRepository.findAllByIdIn(itemIds);
+
+        if (itemSet.stream().anyMatch(it -> !it.isAccessibility())) {
+            throw new IllegalArgumentException("Menu item is not available");
+        }
+
+        Map<Long, MenuItem> itemMap = itemSet.stream()
+                .collect(Collectors.toMap(MenuItem::getId, item -> item));
+
+        List<MenuItem> resultItems = new ArrayList<>(itemIds.size());
+        int price = 0;
+
+        for (Long itemId : itemIds) {
+            MenuItem item = itemMap.get(itemId);
+            if (item == null) {
+                throw new IllegalArgumentException("Unknown menu item");
+            }
+
+            resultItems.add(item);
+            price += item.getPrice();
+        }
+
+        order.setItemsList(resultItems);
+        order.setPrice(price);
     }
 
 }
